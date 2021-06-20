@@ -4,6 +4,8 @@
 
 // ********* Object [key] setting syntax ********
 
+'use strict';
+
 // ES5
 let myKey = 'key3';
 let myObj = {
@@ -44,7 +46,7 @@ let firstAdultIndex = ages.findIndex(age => age >= 18); //1
 
 // `find` and `findIndex`, through allowing a calculated value search, also prevent unnecessary side effects and looping through possible values!
 
-// ********** The Spread Operator: ...  *********
+// ******* The Spread Operator: ...  *******
 
 // The spread operator signals that an array or iterable object should have its contents split into separate arguments within a call.
 
@@ -80,7 +82,7 @@ user1.isAdmin = true;
 
 // console.log(user1); // {name: "John", age: 50, isAdmin: true}
 
-// Update an object
+// ******* Update an object ********
 user1['name'] = 'Johnny'; // or user1.name = "Johnny"
 user1.age = 30; // or user1["age"] = 30;
 
@@ -93,13 +95,18 @@ user1.age = 30; // or user1["age"] = 30;
 // console.log(user1['age']); // 30
 // console.log(user1['isAdmin']); //undefined;
 
-//square bracket vs dot notation
+// *************************************
+// square bracket vs dot notation
+// *************************************
 
 // let key = prompt("What do you want to know about the animal?", "name");
 // console.log(user1[key]); // Johnny
 // console.log(user1.key); // undefined;
 
-let fruit = 'apple';
+// ******** Computed property *********
+
+// We can use square brackets in an object literal, when creating an object. That’s called computed properties.
+let fruit = ('Which fruit to buy?', 'apple');
 let property = 'brand';
 
 let bag = {
@@ -110,3 +117,55 @@ let bag = {
 bag[property] = 'Japanese';
 
 console.log(bag); //{price: 90, apple: 7, brand: "Japanese"}
+// The meaning of a computed property is simple: [fruit] means that the property name should be taken from fruit.
+// So, if a visitor enters "apple", bag will become {apple: 7}.
+// Essentiall, that works the same as:
+bag[fruit] = 7;
+
+// Now more fancier expression
+let myFruit = 'apple';
+let myBag = {
+  [myFruit + 'Computers']: 3 // myBag.appleComputers = 3;
+};
+
+// console.log(myBag); // {appleComputers: 3}
+
+// Square brackets are much more powerful than the dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+
+// So most of the time, when property names are known and simple, the dot is used. And if we need something more complex, then we switch to square brackets.
+
+// ******* Property value shorthand *******
+
+// Using existing variables as values for property names.
+
+function makeUser(name, age) {
+  return {
+    name: name,
+    age: age
+    // ... other properties
+  };
+}
+
+let myUser1 = makeUser('John', 32);
+console.log(myUser1.name); // John
+
+// In the example above, properties have the same names as variables. The use-case of making a property from a variable is so common, that there’s a special `property value shorthand` to make it shorter.
+
+// Instead of `name:name` we can just write `name`, like this:
+
+function newUser(name, age) {
+  return {
+    name, // same as `name:name`
+    age // same as `age:age`
+    // ... other properties
+  };
+}
+
+// We can use both normal properties and shorthands in the same object:
+let name = 'Jenny';
+let user = {
+  name,
+  age: 49
+};
+
+console.log(user); // {name: "Jenny", age: 49}
