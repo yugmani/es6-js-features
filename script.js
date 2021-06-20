@@ -54,7 +54,7 @@ let numbers = [9, 4, 7, 3];
 
 // // Convert NodeList to Array
 let divArray = [...document.querySelectorAll('div')];
-console.log(divArray);
+// console.log(divArray);
 
 // Convert Arguments to Array
 function amazing(a, b, ...rest) {
@@ -62,8 +62,37 @@ function amazing(a, b, ...rest) {
   return (argsArray = [...arguments]);
 }
 
-console.log(amazing(3, 4, 5, 7));
+// console.log(amazing(3, 4, 5, 7));
 // (4) [3, 4, 5, 7]
 
 // The awesome added bonus is being able to convert iterable objects (NodeList, arguments, etc.) to true arrays -- something we've used Array.from or other hacks to do for a long time.
 
+let user1 = new Object(); //object constructor syntax
+let user2 = {}; //object literal syntax;
+
+// console.log(typeof user1); //object
+// console.log(typeof user1 === typeof user2); //true;
+
+// Set key and values in an object.
+user1.name = 'John';
+user1.age = 50;
+user1.isAdmin = true;
+
+// console.log(user1); // {name: "John", age: 50, isAdmin: true}
+
+// Update an object
+user1['name'] = 'Johnny'; // or user1.name = "Johnny"
+user1.age = 30; // or user1["age"] = 30;
+
+//Delete a property from an object
+// delete user1.isAdmin;
+// Or delete user1["isAdmin"];
+
+// Get values of properties from an object;
+// console.log(user1['name']); // Or user1.name; //Johnny
+// console.log(user1['age']); // 30
+// console.log(user1['isAdmin']); //undefined;
+
+
+let key = prompt("What do you want to know about the animal?", "name");
+alert (user2[key]); 
