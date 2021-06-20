@@ -93,6 +93,20 @@ user1.age = 30; // or user1["age"] = 30;
 // console.log(user1['age']); // 30
 // console.log(user1['isAdmin']); //undefined;
 
+//square bracket vs dot notation
 
-let key = prompt("What do you want to know about the animal?", "name");
-alert (user2[key]); 
+// let key = prompt("What do you want to know about the animal?", "name");
+// console.log(user1[key]); // Johnny
+// console.log(user1.key); // undefined;
+
+let fruit = 'apple';
+let property = 'brand';
+
+let bag = {
+  price: 90,
+  [fruit]: 7 // the name of the property is taken from the variable fruit
+};
+
+bag[property] = 'Japanese';
+
+console.log(bag); //{price: 90, apple: 7, brand: "Japanese"}
