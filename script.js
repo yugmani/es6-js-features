@@ -229,3 +229,75 @@ let blueObj = {
 // In the code above, the property obj.test technically exists. So the in operator works right.
 
 // undefined should not be explicitly assigned. We mostly use null for “unknown” or “empty” values.
+
+// **********************************
+// The "for ... in" looping
+// **********************************
+
+// To walk over all keys of an object, there exists a special form of the loop: for..in.
+
+let redObj = {
+  name: 'Redhat',
+  age: 22,
+  isEnrolled: true
+};
+
+for (let key in redObj) {
+  // console.log(key);   // name, age, isEnrolled
+  // console.log(redObj[key]); // Redhat, 22, true
+}
+
+// Also, we could use another variable name here instead of key. For instance, "for (let prop in obj)" is also widely used.
+
+for (let property in redObj) {
+  // console.log(property);  //  // name, age, isEnrolled
+  // console.log(redObj[property]); // Redhat, 22, true
+}
+
+// ******* Ordered like an object *******
+
+//  If we loop over an object, do we get all properties in the same order they were added?
+
+// The short answer is: “ordered in a special fashion”:
+// `integer` properties are sorted, others appear in creation order.
+
+let phoneCodes = {
+  '49': 'Germany',
+  '41': 'Switzerland',
+  '44': 'Great Britain',
+  '977': 'Nepal',
+  // .... so on,
+  '1': 'USA'
+};
+
+for (let code in phoneCodes) {
+  // console.log(code);  // 1, 41, 44, 49, 977
+}
+
+// The phone codes go in the ascending sorted order, because they are integers.
+
+// ****** Integer properties? What’s that?
+
+// The “integer property” term here means a string that can be converted to-and-from an integer without a change.
+
+// Math.trunc is a built-in function that removes the decimal part
+// alert( String(Math.trunc(Number("49"))) ); // "49", same, integer property
+// alert( String(Math.trunc(Number("+49"))) ); // "49", not same "+49" ⇒ not integer property
+// alert( String(Math.trunc(Number("1.2"))) ); // "1", not same "1.2" ⇒ not integer property
+
+// So, to fix the issue with the phone codes, we can “cheat” by making the codes non-integer. Adding a plus "+" sign before each code is enough.
+
+let codes = {
+  '+49': 'Germany',
+  '+41': 'Switzerland',
+  '+44': 'Great Britain',
+  '+977': 'Nepal',
+  // .... so on,
+  '+1': 'USA'
+};
+
+for (let code in codes) {
+  // console.log(+code);  // 49, 41, 44, 977, 1
+}
+
+// Now it works as intended.
