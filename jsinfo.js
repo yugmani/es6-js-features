@@ -367,5 +367,54 @@ let clone2 = Object.assign({}, officer1);
 // Alternative: SPREAD OPERATOR {...object};
 // The easist method of cloning an object is using the `spread operator`.
 let clone3 = { ...officer1 };
-console.log(clone3); // {name: "Andrew", salary: 5000}
 
+// console.log(clone3); // {name: "Andrew", salary: 5000}
+
+// *************************************
+// NESTED Cloning
+// *************************************
+
+// Until now we assumed that all properties of user are primitive.
+// But properties can be references to other objects. What to do with them?
+
+let person = {
+  name: 'Dominick',
+  sizes: {
+    height: 185,
+    width: 50
+  }
+};
+
+// console.log(person.sizes.height);   // 185
+
+// Doing `clonePerson.sizes = person.sizes` is not enough.
+// Because the `person.sizes` is an object, it will be copied by reference. So `clonePerson` and `person` will share the same `sizes`.
+
+let clonePerson = Object.assign({}, person);
+
+// console.log(person.sizes === clonePerson.sizes); //true
+
+// `person` and `clonePerson` share same `sizes`.
+person.sizes.width++; //increase a property `width` by one.
+// console.log(clonePerson.sizes.width); //51
+
+//  TO FIX THAT,
+// We should use a cloning loop that examines each value of person[key] and if it's an object, then replicate its structure as well.
+// That is called a `DEEP CLONING`.
+
+// We can use recursion to implement it. Or, to not reinvent the wheel, take an existing implementation, for instance `_.cloneDeep(obj)` from the JavaScript library lodash.
+
+// **************************************
+// Const objects can be modified
+// **************************************
+
+// An important side effect of storing objects as references is that an object declared as `const` can be modified.
+
+const student = {
+  name: 'Justin'
+};
+
+student.name = 'Benjamin'; // * It might seem that it would cause an error, but it does not, but it does not.
+// The value of `student` is constant, it must always reference the same object, but properties of that object are free to change.
+
+// the `const student` gives an error only if we try to set `const student = ...` or re-assign  as a whole.
