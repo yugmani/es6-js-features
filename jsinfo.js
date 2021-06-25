@@ -236,3 +236,41 @@ for (let code in codes) {
 }
 
 // Now it works as intended.
+
+// *********************************
+// Object references and copying
+// *********************************
+
+// 1. objects are stored and copied “by reference”
+// 2. primitive values: strings, numbers, booleans, etc – are always copied “as a whole value”.
+
+// Primitive valuses:
+let message = 'Hello!';
+let phrase = message;
+
+// console.log('Message: ' + message); //Hello!
+// console.log('Phrase: ' + phrase); //Hello!
+
+// Objects are not like that.
+// A variable assigned to an object stores not the object itself, but its “address in memory” – in other words “a reference” to it.
+
+let staff = {
+  name: 'John'
+};
+
+// The object is stored somewhere in memory, while the `staff` variable (at the left) has a “reference” to it.
+// When we perform actions with the object, e.g. take a property `staff.name`, the JavaScript engine looks at what’s at that address and performs the operation on the actual object.
+// When an object variable is copied, the reference is copied, but the object itself is not duplicated.
+
+let admin = staff;   // copy the reference
+
+// Now we have two variables `admin` and `staff`, each storing a reference to the same only one object.
+
+// We can use either variable to access the object and modify its contents:
+
+admin.name = "Pete";  // changed by the `admin` reference
+console.log(staff.name); // changes are seen from the `staff` reference.
+
+// It’s as if we had a cabinet with two keys and used one of them (admin) to get into it and make changes. 
+// Then, if we later use another key (staff), we are still opening the same cabinet and can access the changed contents.
+
