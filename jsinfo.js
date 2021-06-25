@@ -347,6 +347,11 @@ Object.assign(officer, officer2, officer3);
 
 // console.log(officer); // {name: "John", age: 30, city: "Los Angeles", isFulltime: true}
 
+// If the copied property name already exists, it gets overwritten;
+Object.assign(officer, { name: 'Jessica' });
+
+// console.log(officer.name);  // Jessica
+
 // `Object.assign` can replace `for..in` loop for simple cloning.
 
 let officer1 = {
@@ -357,3 +362,10 @@ let officer1 = {
 let clone2 = Object.assign({}, officer1);
 
 // console.log(clone2);  // {name: "Andrew", salary: 5000}
+// It copies all properties of officer1 into the empty object and returns it.
+
+// Alternative: SPREAD OPERATOR {...object};
+// The easist method of cloning an object is using the `spread operator`.
+let clone3 = { ...officer1 };
+console.log(clone3); // {name: "Andrew", salary: 5000}
+
