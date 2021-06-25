@@ -295,9 +295,65 @@ let n = {};
 // console.log( m == n); //false
 // console.log( m === n); //false
 
-let a = {1: "a"};
-let aa = {1: "a"};
+let a = { 1: 'a' };
+let aa = { 1: 'a' };
 
 // console.log( a == aa ); //false
 
+// ***********************************
+// Cloning and merging, Object.assign
+// ***********************************
 
+// copying an object variable creates one more reference to the same object.
+
+// How can we duplicate an object? Create an independent copy, a clone?
+
+// we need to create a new object and replicate the structure of the existing one by iterating over its properties and copying them on the primitive level.
+
+// Example of Cloning
+let officer = {
+  name: 'John',
+  age: 30
+};
+
+let clone = {}; // the new empty object
+
+// Let's copy all `officer` properties into `clone`.
+for (let key in officer) {
+  clone[key] = officer[key];
+}
+
+// now `clone` is a fully independent object with the same content of `officer`.
+
+clone.age = 17; // change the data in it.
+
+// console.log(officer.age); // still `30` in the original object `officer`.
+
+// Alternative method: Object.assign
+// syntax: Object.assign(dest, [src1, src2, ...])
+// a. The first argument dest is a target object.
+// b. Further arguments src1, ..., srcN (can be as many as needed) are source objects.
+// c. It copies the properties of all source objects src1, ..., srcN into the target dest. In other words, properties of all arguments starting from the second are copied into the first object.
+// d. The call returns dest.
+
+// we can use it to merge several objects into one:
+
+let officer2 = { city: 'Los Angeles' };
+let officer3 = { isFulltime: true };
+
+// copies all properties from officer2 and officer3 into officer
+
+Object.assign(officer, officer2, officer3);
+
+// console.log(officer); // {name: "John", age: 30, city: "Los Angeles", isFulltime: true}
+
+// `Object.assign` can replace `for..in` loop for simple cloning.
+
+let officer1 = {
+  name: 'Andrew',
+  salary: 5000
+};
+
+let clone2 = Object.assign({}, officer1);
+
+// console.log(clone2);  // {name: "Andrew", salary: 5000}
