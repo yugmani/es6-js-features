@@ -262,15 +262,42 @@ let staff = {
 // When we perform actions with the object, e.g. take a property `staff.name`, the JavaScript engine looks at what’s at that address and performs the operation on the actual object.
 // When an object variable is copied, the reference is copied, but the object itself is not duplicated.
 
-let admin = staff;   // copy the reference
+let admin = staff; // copy the reference
 
 // Now we have two variables `admin` and `staff`, each storing a reference to the same only one object.
 
 // We can use either variable to access the object and modify its contents:
 
-admin.name = "Pete";  // changed by the `admin` reference
-console.log(staff.name); // changes are seen from the `staff` reference.
+admin.name = 'Pete'; // changed by the `admin` reference
+// console.log(staff.name); // changes are seen from the `staff` reference.
 
-// It’s as if we had a cabinet with two keys and used one of them (admin) to get into it and make changes. 
+// It’s as if we had a cabinet with two keys and used one of them (admin) to get into it and make changes.
 // Then, if we later use another key (staff), we are still opening the same cabinet and can access the changed contents.
+
+// ***********************************
+// Comparison by reference
+// ***********************************
+
+// Two objects are equal only if they are the same object.
+let x = {};
+let y = x; // copy the reference;
+
+// console.log( x == y); // true, both variables reference the same object.
+
+// console.log( x === y); // true;
+
+// two independent objects are not equal, even though they look alike (both are empty):
+
+let m = {};
+let n = {};
+// m and n are two independent objects.
+
+// console.log( m == n); //false
+// console.log( m === n); //false
+
+let a = {1: "a"};
+let aa = {1: "a"};
+
+// console.log( a == aa ); //false
+
 
