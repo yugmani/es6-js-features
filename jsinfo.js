@@ -402,10 +402,36 @@ person.sizes.width++; //increase a property `width` by one.
 // We should use a cloning loop that examines each value of person[key] and if it's an object, then replicate its structure as well.
 // That is called a `DEEP CLONING`.
 
+// Cloning nested objects
+
+let teacher = {
+  name: 'Victoria',
+  sizes: {
+    height: 185,
+    width: 50
+  }
+};
+
+let cloneTeacher = {};
+
+for (let key in teacher) {
+  cloneTeacher[key] = teacher[key];
+  if (typeof teacher[key] === 'object') {
+    cloneTeacher[key] = {};
+    for (let property in teacher[key]) {
+      cloneTeacher[key][property] = teacher[key][property];
+    }
+  }
+}
+
+cloneTeacher.sizes.height = 110;
+// console.log(cloneTeacher.sizes.height); // 110
+// console.log(teacher.sizes.height); // 185
+
 // We can use recursion to implement it. Or, to not reinvent the wheel, take an existing implementation, for instance `_.cloneDeep(obj)` from the JavaScript library lodash.
 
 // **************************************
-// Const objects can be modified
+// `const objects` can be modified
 // **************************************
 
 // An important side effect of storing objects as references is that an object declared as `const` can be modified.
